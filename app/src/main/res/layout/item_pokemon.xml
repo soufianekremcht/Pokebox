@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="pokemon"
+            type="com.soufianekre.pokebox.data.models.PokemonItem" />
+    </data>
+    <com.skydoves.transformationlayout.TransformationLayout
+        android:id="@+id/item_pokemon_transformation_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:transformation_duration="550">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/item_pokemon_card"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_small"
+            android:padding="@dimen/spacing_small"
+            android:background="@color/background800"
+            android:foreground="?selectableItemBackground"
+            app:cardElevation="3dp"
+            app:cardCornerRadius="15dp"
+           >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:foreground="?attr/selectableItemBackground"
+                android:layout_gravity="center">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/item_pokemon_image"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:padding="@dimen/spacing_small"
+                    android:layout_margin="@dimen/spacing_small"
+                    android:src="@drawable/img_alien"
+                    app:paletteCard="@{itemPokemonCard}"
+                    app:paletteImage="@{pokemon.imageUrl}"/>
+
+
+                <TextView
+                    android:id="@+id/item_pokemon_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:padding="@dimen/spacing_small"
+                    android:layout_margin="@dimen/spacing_small"
+                    android:text="@{pokemon.name}"
+                    android:textSize="@dimen/font_normal"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    tools:text="Charizand"/>
+
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <!-- other views -->
+
+</com.skydoves.transformationlayout.TransformationLayout>
+
+
+
+</layout>
