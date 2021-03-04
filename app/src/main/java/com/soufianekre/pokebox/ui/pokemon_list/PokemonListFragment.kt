@@ -55,7 +55,8 @@ class PokemonListFragment : BaseFragment<FragmentPokemonListBinding,PokemonListV
             override fun loadMoreItems() {
                 isLoading = true
                 currentPage++
-                getViewModel().fetchPokemons(currentPage, PAGE_SIZE)
+                viewBinding.pokemonProgressBar.visibility = View.VISIBLE
+                getViewModel().fetchPokemons( PAGE_SIZE,currentPage)
             }
 
             override fun isLastPage(): Boolean {
@@ -97,7 +98,8 @@ class PokemonListFragment : BaseFragment<FragmentPokemonListBinding,PokemonListV
     }
 
     override fun getViewModel(): PokemonListViewModel {
-        mPokemonListViewModel = ViewModelProvider(this,MyViewModelFactory()).get(PokemonListViewModel::class.java)
+        mPokemonListViewModel = ViewModelProvider(this,MyViewModelFactory())
+            .get(PokemonListViewModel::class.java)
         return mPokemonListViewModel
     }
 
@@ -109,6 +111,7 @@ class PokemonListFragment : BaseFragment<FragmentPokemonListBinding,PokemonListV
                 pokemonAdapter.insertAll(it as java.util.ArrayList<PokemonItem>)
 
             isLoading =false
+            viewBinding.pokemonProgressBar.visibility = View.GONE
 
         })
     }

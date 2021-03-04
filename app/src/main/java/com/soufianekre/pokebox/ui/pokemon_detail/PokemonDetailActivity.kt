@@ -149,10 +149,27 @@ class PokemonDetailActivity :
         getViewModel().pokemonInfoLiveData.observe(this, Observer {
             // display stats
             for (stat in it?.stats!!) {
-                if (stat.stat?.name == "hp") {
-                    val fullStat = stat.baseStat + stat.effort
-                    binding.pokemonHpStatProgress.labelText = formatStat(fullStat)
-                    binding.pokemonHpStatProgress.progress = (fullStat).toFloat()
+                when (stat.stat?.name){
+                    "hp" -> {
+                        val fullStat = stat.baseStat + stat.effort
+                        binding.pokemonHpStatProgress.labelText = formatStat(fullStat)
+                        binding.pokemonHpStatProgress.progress = (fullStat).toFloat()
+                    }
+                    "speed" ->{
+                        val fullStat = stat.baseStat + stat.effort
+                        binding.pokemonSpeedStatProgress.labelText = formatStat(fullStat)
+                        binding.pokemonSpeedStatProgress.progress = (fullStat).toFloat()
+                    }
+                    "defense" ->{
+                        val fullStat = stat.baseStat + stat.effort
+                        binding.pokemonDefStatProgress.labelText = formatStat(fullStat)
+                        binding.pokemonDefStatProgress.progress = (fullStat).toFloat()
+                    }
+                    "attack" ->{
+                        val fullStat = stat.baseStat + stat.effort
+                        binding.pokemonAtkStatProgress.labelText = formatStat(fullStat)
+                        binding.pokemonAtkStatProgress.progress = (fullStat).toFloat()
+                    }
                 }
             }
             // display types

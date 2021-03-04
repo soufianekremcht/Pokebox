@@ -19,12 +19,12 @@ class PokemonListViewModel : BaseViewModel() {
         )
 
     init {
-        fetchPokemons(0, 20)
+        fetchPokemons(20, 0)
     }
 
     var pokemonListInfo: MutableLiveData<List<PokemonItem>> = MutableLiveData()
 
-    fun fetchPokemons(page: Int, pageSize: Int) {
+    fun fetchPokemons(pageSize: Int,page: Int) {
         compositeDisposable.add(
             RxHelper
                 .getFlowable(pokemonListRepo.fetchPokemonItems(page,pageSize))
