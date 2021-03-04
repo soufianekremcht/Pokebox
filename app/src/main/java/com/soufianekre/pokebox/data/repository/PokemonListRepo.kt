@@ -26,8 +26,9 @@ class PokemonListRepo(var pokemonApiService: PokemonApiService, var pokemonDao: 
     }
 
     private fun fetchPokemonItemFromNetwork(pageCount: Int,page :Int): Flowable<List<PokemonItem>> {
+        var offset = page*pageCount;
         return pokemonApiService
-            .getPokemonResponse()
+            .getPokemonResponse(pageCount,offset = offset)
             .map {
                 it.body()?.results
             }.flatMap {
