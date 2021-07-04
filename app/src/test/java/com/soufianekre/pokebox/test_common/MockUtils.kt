@@ -3,7 +3,7 @@ package com.soufianekre.pokebox.test_common
 import com.soufianekre.pokebox.data.models.PokemonItem
 import com.soufianekre.pokebox.data.models.PokemonItemInfo
 
-object MockUtil {
+object MyMockUtil {
 
     fun mockPokemon() = PokemonItem(
         name = "bulbasaur",

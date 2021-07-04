@@ -41,10 +41,11 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.google.android.material:material:1.3.0'
     implementation "androidx.cardview:cardview:1.0.0"
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     implementation "androidx.preference:preference-ktx:1.1.1"
@@ -61,19 +62,18 @@ dependencies {
     implementation "androidx.room:room-ktx:$versions.roomVersion"
     implementation "androidx.room:room-rxjava2:$versions.roomVersion"
 
+    def fragment_version = "1.3.2"
+    debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
+
+
     kapt "androidx.room:room-compiler:$versions.roomVersion"
-    testImplementation "androidx.arch.core:core-testing:$versions.archCompomentVersion"
+
 
     // glide
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
-    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    kapt 'com.github.bumptech.glide:compiler:4.12.0'
 
-    implementation 'com.github.florent37:glidepalette:2.1.2'
-
-    // coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutinesVersion"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutinesVersion"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.coroutinesVersion"
+    implementation 'com.github.florent37:glidepalette:2.1.0'
 
     // transformation
     implementation "com.github.skydoves:transformationlayout:$versions.transformationLayout"
@@ -90,6 +90,9 @@ dependencies {
     // startup
     implementation "androidx.startup:startup-runtime:$versions.startupVersion"
 
+    // PokeAPI
+    // implementation 'me.sargunvohra.lib:pokekotlin:2.3.0'
+
 
 
     /*** third party Ui components  ***/
@@ -105,65 +108,50 @@ dependencies {
     implementation "com.mikepenz:materialdrawer:$versions.materialDrawerRelease"
     implementation "com.mikepenz:materialdrawer-iconics:$versions.materialDrawerRelease"
     implementation "com.mikepenz:materialdrawer-nav:$versions.materialDrawerRelease"
-    implementation "androidx.annotation:annotation:1.1.0"
+    implementation "androidx.annotation:annotation:1.2.0"
 
     //json parser
     implementation "com.squareup.moshi:moshi:1.11.0"
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.11.0")
 
-
-    implementation 'me.sargunvohra.lib:pokekotlin:2.3.1'
-
-
     // reactive
     implementation "io.reactivex.rxjava2:rxjava:$versions.rxjavaKotlin"
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     // finger print
+    //noinspection GradleDependency
     implementation "androidx.biometric:biometric:$versions.biometricVersion"
 
 
     // dexter permission
     implementation 'com.karumi:dexter:6.2.2'
 
-
-
-
-
-    // about + License
-    implementation "com.mikepenz:aboutlibraries:8.3.0"
-    implementation 'com.github.daniel-stoneuk:material-about-library:3.1.2'
-    implementation 'de.psdev.licensesdialog:licensesdialog:2.1.0'
-
     // biometric finger print
     implementation 'co.infinum:goldfinger:2.0.1'
-
-    // pattern lock
-    implementation 'com.andrognito.patternlockview:patternlockview:1.0.0'
-    implementation 'com.andrognito.patternlockview:patternlockview-reactive:1.0.0'
-
     // logging
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
     / ***** Testing ******/
-    // Unit test
-    testImplementation 'junit:junit:4.13.1'
+    // Espresso
+    def androidx_test_espresso = "3.1.0"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$androidx_test_espresso"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$androidx_test_espresso"
+    implementation "androidx.test.espresso:espresso-idling-resource:$androidx_test_espresso"
 
-    testImplementation "androidx.test:core:$versions.androidxTest"
-    //For mocking using Mockito framework
+
+    // androidx.test
+    def androidx_test = "1.1.0"
+    androidTestImplementation "androidx.test:runner:$androidx_test"
+    androidTestImplementation "androidx.test:core:$androidx_test"
+
+
+    // Mocking Dependencies
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$versions.mockitoKotlinVersion"
     testImplementation "org.robolectric:robolectric:$versions.robolectricVersion"
-    testImplementation 'com.squareup.okhttp3:mockwebserver:4.3.1'
-
-
-    androidTestImplementation "androidx.test.ext:junit:$versions.androidxTestJunit"
-    androidTestImplementation "com.android.support.test:runner:$versions.androidTestRunner"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$versions.espressoVersion"
-
+    testImplementation 'com.squareup.okhttp3:mockwebserver:4.9.0'
 
 
     // debugging
     debugImplementation 'cat.ereza:customactivityoncrash:2.2.0'
-
-    /*debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'*/
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
 }

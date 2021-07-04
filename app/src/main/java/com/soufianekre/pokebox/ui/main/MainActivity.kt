@@ -2,6 +2,7 @@ package com.soufianekre.pokebox.ui.main
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -42,6 +43,13 @@ class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>() {
         return super.onCreateOptionsMenu(menu)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.menu_main_refresh -> return false
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun setupUI(){
         setSupportActionBar(viewBinding.mainToolbar)
 
@@ -51,7 +59,10 @@ class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>() {
 
         viewBinding.mainNavView.setNavigationItemSelectedListener{
             when(it.itemId){
-                R.id.drawer_pokemons -> showInfo("Pokemons")
+                R.id.drawer_pokemons -> {
+                    showInfo("Pokemons")
+                    loadFragment(PokemonListFragment())
+                }
                 R.id.drawer_contests -> showInfo("Contests")
                 R.id.drawer_locations -> showInfo("Locations")
                 R.id.drawer_evolution -> showInfo("Evolutions")

@@ -7,6 +7,7 @@ import com.soufianekre.pokebox.data.models.PokemonItemInfo
 import com.soufianekre.pokebox.data.network.RestProvider
 import com.soufianekre.pokebox.data.repository.PokemonDetailRepo
 import com.soufianekre.pokebox.helper.RxHelper
+import com.soufianekre.pokebox.helper.rx_scheduler.RxSchedulerProvider
 import com.soufianekre.pokebox.ui.base.BaseViewModel
 import timber.log.Timber
 
@@ -14,7 +15,8 @@ class PokemonDetailViewModel() : BaseViewModel() {
 
     var pokemonDetailRepo: PokemonDetailRepo = PokemonDetailRepo(
         RestProvider.getPokemonService(),
-        AppDatabase.getInstance(PokeboxApp.getInstance()).pokemonInfoDao()
+        AppDatabase.getInstance(PokeboxApp.getInstance()).pokemonInfoDao(),
+        RxSchedulerProvider
     )
     var pokemonInfoLiveData: MutableLiveData<PokemonItemInfo?> = MutableLiveData()
 

@@ -7,6 +7,7 @@ import com.soufianekre.pokebox.data.models.PokemonItem
 import com.soufianekre.pokebox.data.network.RestProvider
 import com.soufianekre.pokebox.data.repository.PokemonListRepo
 import com.soufianekre.pokebox.helper.RxHelper
+import com.soufianekre.pokebox.helper.rx_scheduler.RxSchedulerProvider
 import com.soufianekre.pokebox.ui.base.BaseViewModel
 import timber.log.Timber
 
@@ -15,7 +16,8 @@ class PokemonListViewModel : BaseViewModel() {
     private val pokemonListRepo: PokemonListRepo =
         PokemonListRepo(
             RestProvider.getPokemonService(),
-            AppDatabase.getInstance(PokeboxApp.getInstance()).pokemonDao()
+            AppDatabase.getInstance(PokeboxApp.getInstance()).pokemonDao(),
+            RxSchedulerProvider
         )
 
     init {
@@ -35,4 +37,6 @@ class PokemonListViewModel : BaseViewModel() {
                 })
         )
     }
+
+
 }

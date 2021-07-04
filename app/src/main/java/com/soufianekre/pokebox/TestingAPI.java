@@ -1,18 +1,9 @@
 package com.soufianekre.pokebox;
 
-import java.util.List;
-
-import me.sargunvohra.lib.pokekotlin.client.PokeApiClient;
-import me.sargunvohra.lib.pokekotlin.model.ContestType;
-import me.sargunvohra.lib.pokekotlin.model.EvolutionChain;
-import me.sargunvohra.lib.pokekotlin.model.Location;
-import me.sargunvohra.lib.pokekotlin.model.Pokemon;
-import me.sargunvohra.lib.pokekotlin.model.PokemonStat;
-import me.sargunvohra.lib.pokekotlin.model.PokemonType;
-
 public class TestingAPI {
 
 
+    /*
 
     public static void  main(String[] args) {
         int POKEMON_ID = 1;
@@ -72,4 +63,6 @@ public class TestingAPI {
         System.out.println(o);
     }
 
+
+     */
 }

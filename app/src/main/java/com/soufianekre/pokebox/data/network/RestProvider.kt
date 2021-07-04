@@ -4,7 +4,6 @@ import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import com.soufianekre.pokebox.data.models.PokemonItemInfo
 import com.soufianekre.pokebox.data.network.APIConstants.REST_URL
-import com.soufianekre.pokebox.data.network.service.PokemonApiService
 import com.squareup.moshi.*
 import okhttp3.OkHttpClient
 import okio.IOException

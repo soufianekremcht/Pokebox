@@ -30,7 +30,8 @@ class PokemonDetailActivityTest{
 
     @Test
     fun test_pokemonName(){
-        onView(withId(R.id.pokemon_name)).perform(click()).check(ViewAssertions.matches(withText("Pokemon_name")))
+        onView(withId(R.id.pokemon_name)).perform(click())
+            .check(ViewAssertions.matches(withText("Pokemon_name")))
     }
 
     @After

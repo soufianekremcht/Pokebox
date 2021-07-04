@@ -4,10 +4,12 @@ import com.nhaarman.mockitokotlin2.atLeastOnce
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.soufianekre.pokebox.data.db.dao.PokemonDao
+import com.soufianekre.pokebox.data.models.PokemonItem
 import com.soufianekre.pokebox.data.repository.PokemonListRepo
 import com.soufianekre.pokebox.ui.main.MainViewModel
 import io.reactivex.Observable
 import io.reactivex.observers.TestObserver
+import io.reactivex.schedulers.Schedulers
 import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
 import org.junit.Test
@@ -31,16 +33,16 @@ class PokemonListModelTest {
 
     @Test
     fun pokemonList_isLoaded(){
-
+        val observer = TestObserver<String>()
         val testScheduler = TestScheduler()
-        mockPokemonDao.getPokemonList()
-            .subscribeOn(testScheduler)
-            .observeOn(testScheduler)
-            .subscribe()
+
         setupMocks()
         verify(mockPokemonDao, atLeastOnce()).getPokemonList()
 
-
+        // synchronously wait
+        var results : Iterable<List<PokemonItem>> = mockPokemonDao.getPokemonList()
+            .subscribeOn(Schedulers.io())
+            .blockingIterable();
 
         // Using Test Observer
         // Read carefully, this is very important

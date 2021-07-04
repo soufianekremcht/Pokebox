@@ -1,7 +1,7 @@
-package com.soufianekre.pokebox.data.network.service
+package com.soufianekre.pokebox.data.network
 
 import com.soufianekre.pokebox.data.models.PokemonItemInfo
-import com.soufianekre.pokebox.data.models.PokemonResults
+import com.soufianekre.pokebox.data.models.PokemonResponse
 import com.soufianekre.pokebox.data.network.APIConstants.POKEMON
 import io.reactivex.Flowable
 import io.reactivex.Single
@@ -14,9 +14,9 @@ import retrofit2.http.Query
 interface PokemonApiService {
 
     @GET(POKEMON)
-    fun getPokemonResponse(@Query("limit") limit :Int = 20, @Query("offset") offset :Int = 0) : Flowable<Response<PokemonResults>>
+    fun fetchPokemonResponse(@Query("limit") limit :Int = 20, @Query("offset") offset :Int = 0) : Flowable<Response<PokemonResponse>>
 
     @GET("$POKEMON{name}")
-    fun getPokemon(@Path("name") name :String) : Single<Response<PokemonItemInfo>>
+    fun fetchPokemonInfo(@Path("name") name :String) : Single<Response<PokemonItemInfo>>
 
 }

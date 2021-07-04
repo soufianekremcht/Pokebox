@@ -32,6 +32,10 @@ class PokemonListFragment : BaseFragment<FragmentPokemonListBinding,PokemonListV
 
     lateinit var pokemonAdapter : PokemonListAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding = getViewBinding()
@@ -72,6 +76,11 @@ class PokemonListFragment : BaseFragment<FragmentPokemonListBinding,PokemonListV
 
     override fun onStart() {
         super.onStart()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
     }
 
     override fun onStop() {

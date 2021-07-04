@@ -16,4 +16,8 @@ public interface PokemonDao{
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPokemons(pokemonList :List<PokemonItem>) : Completable
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertPokemon(pokemon :PokemonItem) : Completable
+
 }
