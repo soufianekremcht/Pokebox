@@ -5,7 +5,7 @@ plugins {
     id 'kotlin-kapt'
 }
 apply from: "$rootDir/dependencies.gradle"
-apply from: "$rootDir/spotless.gradle"
+//apply from: "$rootDir/spotless.gradle"
 
 android {
     compileSdkVersion 29
