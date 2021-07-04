@@ -5,6 +5,7 @@ plugins {
     id 'kotlin-kapt'
 }
 apply from: "$rootDir/dependencies.gradle"
+apply from: "$rootDir/spotless.gradle"
 
 android {
     compileSdkVersion 29
@@ -155,3 +156,4 @@ dependencies {
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
 }
+
