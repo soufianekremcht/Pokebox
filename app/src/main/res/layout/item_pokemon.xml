@@ -9,66 +9,109 @@
             name="pokemon"
             type="com.soufianekre.pokebox.data.models.PokemonItem" />
     </data>
+
     <com.skydoves.transformationlayout.TransformationLayout
         android:id="@+id/item_pokemon_transformation_layout"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:transformation_duration="550">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/item_pokemon_card"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_small"
-            android:padding="@dimen/spacing_small"
             android:background="@color/background800"
             android:foreground="?selectableItemBackground"
-            app:cardElevation="3dp"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_small"
             app:cardCornerRadius="15dp"
-           >
+            app:cardElevation="3dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:foreground="?attr/selectableItemBackground"
-                android:layout_gravity="center">
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/item_pokemon_image"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:padding="@dimen/spacing_small"
-                    android:layout_margin="@dimen/spacing_small"
-                    android:src="@drawable/img_alien"
-                    app:paletteCard="@{itemPokemonCard}"
-                    app:paletteImage="@{pokemon.imageUrl}"/>
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/material_green_500">
 
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="end|bottom"
+                    android:layout_marginEnd="@dimen/spacing_small"
+                    android:layout_marginBottom="@dimen/spacing_small"
+                    android:alpha="0.2"
+                    android:backgroundTint="@color/white"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_pokeball"
+                    app:tint="@color/white" />
 
-                <TextView
-                    android:id="@+id/item_pokemon_name"
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:gravity="center_horizontal"
-                    android:padding="@dimen/spacing_small"
-                    android:layout_margin="@dimen/spacing_small"
-                    android:text="@{pokemon.name}"
-                    android:textSize="@dimen/font_normal"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    tools:text="Charizand"/>
+                    android:layout_gravity="center"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/item_pokemon_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="@dimen/spacing_small"
+                        android:gravity="center_horizontal"
+                        android:padding="@dimen/spacing_small"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_large"
+                        android:textStyle="bold"
+                        tools:text="#001" />
 
 
-            </LinearLayout>
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/item_pokemon_image"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_below="@id/item_pokemon_id"
+                        android:layout_alignParentEnd="true"
+                        android:padding="@dimen/spacing_small"
+                        android:src="@drawable/img_pokemon_bulbasaur"
+                        app:paletteCard="@{itemPokemonCard}"
+                        app:paletteImage="@{pokemon.imageUrl}" />
+
+
+                    <TextView
+                        android:id="@+id/item_pokemon_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/spacing_small"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_large"
+                        android:textStyle="bold"
+                        tools:text="Charizand"
+                        android:layout_marginTop="@dimen/spacing_large"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/pokemon_strong_points_list_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/item_pokemon_name"
+                        android:layout_margin="@dimen/spacing_normal"
+                        tools:itemCount="3"
+                        tools:listitem="@layout/item_poke_strong_points"/>
+
+
+                </RelativeLayout>
+
+
+            </FrameLayout>
         </com.google.android.material.card.MaterialCardView>
 
 
         <!-- other views -->
 
-</com.skydoves.transformationlayout.TransformationLayout>
-
+    </com.skydoves.transformationlayout.TransformationLayout>
 
 
 </layout>

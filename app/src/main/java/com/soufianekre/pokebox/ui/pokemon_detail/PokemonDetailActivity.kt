@@ -3,31 +3,22 @@ package com.soufianekre.pokebox.ui.pokemon_detail
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.Typeface
 import android.os.Bundle
-import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
-import android.view.WindowManager
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.github.florent37.glidepalette.BitmapPalette
-import com.github.florent37.glidepalette.GlidePalette
-import com.skydoves.androidribbon.ribbonView
-import com.skydoves.rainbow.Rainbow
-import com.skydoves.rainbow.RainbowOrientation
-import com.skydoves.rainbow.color
+import com.google.android.material.appbar.AppBarLayout
 import com.skydoves.transformationlayout.TransformationCompat
 import com.skydoves.transformationlayout.TransformationLayout
 import com.soufianekre.pokebox.MyViewModelFactory
 import com.soufianekre.pokebox.R
 import com.soufianekre.pokebox.data.models.PokemonItem
 import com.soufianekre.pokebox.databinding.ActivityPokemonDetailBinding
-import com.soufianekre.pokebox.helper.PokemonTypeUtils
 import com.soufianekre.pokebox.ui.base.BaseTransformationActivity
 import com.soufianekre.pokebox.ui.pokemon_list.PokemonListFragment.Companion.POKEMON_TO_SHOW
 import timber.log.Timber
@@ -47,9 +38,8 @@ class PokemonDetailActivity :
         binding = getViewDataBinding()
         binding.apply {
             lifecycleOwner = this@PokemonDetailActivity
-            vm = getViewModel()
-            pokemon = currentPokemon
         }
+
         getViewModel().fetchPokemonInfo(currentPokemon?.name!!)
         setupUI()
 
@@ -79,7 +69,7 @@ class PokemonDetailActivity :
     }
 
     override fun getLayoutId(): Int {
-        return R.layout.activity_pokemon_detail
+        return R.layout.activity_pokemon_detail_version_1
     }
 
     override fun getViewModel(): PokemonDetailViewModel {
@@ -99,41 +89,80 @@ class PokemonDetailActivity :
     }
 
     private fun setupUI() {
-        setSupportActionBar(binding.pokemonDetailToolbar)
+        setSupportActionBar(binding.pokeDetailToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        binding.pokemonDetailToolbar.setNavigationOnClickListener {
+        binding.pokeDetailToolbar.setNavigationOnClickListener {
             onBackPressed()
         }
+
+        binding.pokemonDetailAppbar.addOnOffsetChangedListener(
+            AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+                {
+
+                }
+            });
+
+
+        val pagerAdapter = PokemonDetailViewPagerAdapter(supportFragmentManager)
+
+        binding.pokeDetailViewPager.apply {
+            adapter = pagerAdapter
+            addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+
+                override fun onPageScrolled(
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int
+                ) {
+                }
+
+                override fun onPageSelected(position: Int) {
+
+                }
+
+                override fun onPageScrollStateChanged(state: Int) {
+                }
+
+            })
+        }
+
+        binding.pokeDetailTabLayout.setupWithViewPager(binding.pokeDetailViewPager)
+        //binding.pokeDetailTabLayout.getTabAt(0)?.setIcon(R.drawable.ic_home_news)
 
         val options: RequestOptions = RequestOptions()
             .error(R.drawable.img_spider)
         // show image + color the  background
+
         Glide.with(this)
             .load(currentPokemon?.getImageUrl())
-            .listener(
-                GlidePalette.with(currentPokemon?.getImageUrl())
-                    .use(BitmapPalette.Profile.MUTED_LIGHT)
-                    .intoCallBack { palette ->
-                        val light = palette?.lightVibrantSwatch?.rgb
-                        val domain = palette?.dominantSwatch?.rgb
-                        if (domain != null) {
-                            if (light != null) {
-                                Rainbow(binding.pokemonDetailToolbarLayout).palette {
-                                    +color(domain)
-                                    +color(light)
-                                }.background(orientation = RainbowOrientation.TOP_BOTTOM)
-                            } else {
-                                binding.pokemonDetailToolbarLayout.setBackgroundColor(domain)
-                            }
-                            window.apply {
-                                addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-                                statusBarColor = domain
-                            }
-                        }
-                    }.crossfade(true))
             .apply(options)
             .into(binding.pokemonImage)
+        /*
+        .listener(
+            GlidePalette.with(currentPokemon?.getImageUrl())
+                .use(BitmapPalette.Profile.MUTED_LIGHT)
+                .intoCallBack { palette ->
+                    val light = palette?.lightVibrantSwatch?.rgb
+                    val domain = palette?.dominantSwatch?.rgb
+                    if (domain != null) {
+                        if (light != null) {
+                            Rainbow(binding.pokemonDetailToolbarLayout).palette {
+                                +color(domain)
+                                +color(light)
+                            }.background(orientation = RainbowOrientation.TOP_BOTTOM)
+                        } else {
+                            binding.pokemonDetailToolbarLayout.setBackgroundColor(domain)
+                        }
+                        window.apply {
+                            addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+                            statusBarColor = domain
+                        }
+                    }
+                }
+                .crossfade(true))
+         */
+
 
         binding.pokemonDetailAppbar.backgroundTintList = ColorStateList.valueOf(
             ResourcesCompat.getColor(resources, R.color.material_amber_800, null)
@@ -142,12 +171,13 @@ class PokemonDetailActivity :
         getPokemonInfo()
 
 
-
     }
 
     private fun getPokemonInfo() {
         getViewModel().pokemonInfoLiveData.observe(this, Observer {
+
             // display stats
+            /*
             for (stat in it?.stats!!) {
                 when (stat.stat?.name){
                     "hp" -> {
@@ -172,7 +202,10 @@ class PokemonDetailActivity :
                     }
                 }
             }
-            // display types
+
+             */
+            // TODO : display types
+            /*
             for (typeInfo in it.types!!) {
 
                 with(binding.pokemonTypeListView) {
@@ -197,6 +230,8 @@ class PokemonDetailActivity :
                     )
                 }
             }
+
+             */
         })
     }
 
@@ -211,8 +246,6 @@ class PokemonDetailActivity :
     private fun formatWeight(weight: Int): String {
         return "$weight KG"
     }
-
-
 
 
     companion object {

@@ -15,7 +15,21 @@
         <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
+        <item name="android:textViewStyle">@style/CircularStdTextViewStyle</item>
+        <item name="android:buttonStyle">@style/CircularStdButtonStyle</item>
     </style>
+
+    <style name="CircularStdTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/circular_std_medium</item>
+    </style>
+
+
+    <style name="CircularStdButtonStyle" parent="android:Widget.Holo.Button">
+        <item name="android:fontFamily">@font/circular_std_medium</item>
+    </style>
+
+
 
     <style name="Theme.Pokebox.ThemeOverLay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
     <style name="Theme.Pokebox.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Dark"/>

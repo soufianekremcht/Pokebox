@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="pokemon"
+            type="com.soufianekre.pokebox.data.models.PokemonItem" />
+
+        <variable
+            name="vm"
+            type="com.soufianekre.pokebox.ui.pokemon_detail.PokemonDetailViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/pokemon_detail_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/Theme.Pokebox.ThemeOverLay"
+            android:background="@color/transparent"
+            app:elevation="10dp">
+
+                <LinearLayout
+                    android:id="@+id/pokemon_detail_toolbar_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/bg_dashboard"
+                    android:backgroundTint="@color/material_green_500"
+                    >
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/pokemon_detail_toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:popupTheme="@style/Theme.Pokebox.PopupOverlay"
+                        app:title="Pokebox"
+                        />
+
+                    <TextView
+                        android:id="@+id/pokemon_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="@dimen/spacing_small"
+                        android:padding="@dimen/spacing_normal"
+                        android:text="@{pokemon.name}"
+                        android:textSize="@dimen/font_big"
+                        tools:text="Bulbarseur"
+                        android:textStyle="bold" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/pokemon_image"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="@dimen/spacing_normal"
+                        android:padding="@dimen/spacing_normal"
+                        android:src="@drawable/img_pokemon_bulbasaur" />
+
+
+                </LinearLayout>
+
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/pokemon_detail_scroll_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_normal"
+                android:orientation="vertical"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+
+
+
+                <com.skydoves.androidribbon.RibbonRecyclerView
+                    android:id="@+id/pokemon_type_list_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="@dimen/spacing_tiny"
+                    android:gravity="center_horizontal"
+                    android:padding="@dimen/spacing_tiny"
+                    tools:itemCount="2"
+                    app:spanCount="2"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:ribbon_recycler_orientation="horizontal"
+                    tools:listitem="@layout/item_ribbon"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/pokemon_weight_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/pokemon_weight_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/spacing_normal"
+                            android:text='@{vm.pokemonInfoLiveData.weightString}'
+                            android:textSize="@dimen/font_large"
+                            android:textStyle="bold"
+                            tools:text="20"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/pokemon_weight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/spacing_normal"
+                            android:text="Weight" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/pokemon_height_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/pokemon_height_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/spacing_normal"
+                            android:text='@{vm.pokemonInfoLiveData.heightString}'
+                            android:textSize="@dimen/font_large"
+                            android:textStyle="bold"
+                            tools:text="49"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/pokemon_height"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/spacing_normal"
+                            android:text="Height" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/pokemon_state_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+
+                    android:layout_margin="@dimen/spacing_normal"
+                    android:text="Base Stats"
+                    android:textSize="@dimen/font_large"
+
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/pokemon_state_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/hp_stat_layout"
+                        style="@style/style_pokemon_detail_stat_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/style_pokemon_detail_progress_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="HP" />
+
+                        <com.skydoves.progressview.ProgressView
+                            android:id="@+id/pokemon_hp_stat_progress"
+                            style="@style/style_pokemon_detail_progress_bar"
+                            android:layout_width="match_parent"
+                            app:progressView_colorBackground="@color/white"
+                            app:progressView_colorProgress="@color/purple_200"
+                            app:progressView_max="@{vm.pokemonInfoLiveData.maxHp}"
+                            app:progressView_labelText="@{vm.pokemonInfoLiveData.hpString}"
+                            app:progressView_progress="@{vm.pokemonInfoLiveData.hp}"
+
+
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/atk_stat_layout"
+                        style="@style/style_pokemon_detail_stat_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/style_pokemon_detail_progress_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="ATK" />
+
+                        <com.skydoves.progressview.ProgressView
+                            android:id="@+id/pokemon_atk_stat_progress"
+                            style="@style/style_pokemon_detail_progress_bar"
+
+                            android:layout_width="match_parent"
+                            app:progressView_colorProgress="@color/material_red_500"
+                            app:progressView_labelColorInner="@color/white"
+                            app:progressView_labelColorOuter="@color/black"
+                            app:progressView_max="@{vm.pokemonInfoLiveData.maxAttack}"
+                            app:progressView_labelText="@{vm.pokemonInfoLiveData.attackString}"
+                            app:progressView_progress="@{vm.pokemonInfoLiveData.attack}"
+
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/spd_stat_layout"
+                        style="@style/style_pokemon_detail_stat_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/style_pokemon_detail_progress_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="SPD" />
+
+                        <com.skydoves.progressview.ProgressView
+                            android:id="@+id/pokemon_speed_stat_progress"
+                            style="@style/style_pokemon_detail_progress_bar"
+                            android:layout_width="match_parent"
+                            app:progressView_colorProgress="@color/material_green_500"
+                            app:progressView_labelColorInner="@color/white"
+                            app:progressView_labelColorOuter="@color/black"
+                            app:progressView_max="@{vm.pokemonInfoLiveData.maxHp}"
+                            app:progressView_labelText="@{vm.pokemonInfoLiveData.hpString}"
+                            app:progressView_progress="@{vm.pokemonInfoLiveData.hp}"/>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/def_stat_layout"
+                        style="@style/style_pokemon_detail_stat_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/style_pokemon_detail_progress_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="DEF" />
+
+                        <com.skydoves.progressview.ProgressView
+                            android:id="@+id/pokemon_def_stat_progress"
+                            style="@style/style_pokemon_detail_progress_bar"
+                            android:layout_width="match_parent"
+                            app:progressView_colorProgress="@color/material_blue_500"
+                            app:progressView_labelColorInner="@color/white"
+                            app:progressView_labelColorOuter="@color/black"
+                            app:progressView_max="@{vm.pokemonInfoLiveData.maxHp}"
+                            app:progressView_labelText="@{vm.pokemonInfoLiveData.hpString}"
+                            app:progressView_progress="@{vm.pokemonInfoLiveData.hp}" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/exp_stat_layout"
+                        style="@style/style_pokemon_detail_stat_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/style_pokemon_detail_progress_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="EXP" />
+
+                        <com.skydoves.progressview.ProgressView
+                            android:id="@+id/pokemon_exp_stat_progress"
+                            style="@style/style_pokemon_detail_progress_bar"
+                            android:layout_width="match_parent"
+                            app:progressView_colorProgress="@color/material_yellow_accent_400"
+                            app:progressView_max="@{vm.pokemonInfoLiveData.maxExp}"
+                            app:progressView_labelText="@{vm.pokemonInfoLiveData.expString}"
+                            app:progressView_progress="@{vm.pokemonInfoLiveData.exp}" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

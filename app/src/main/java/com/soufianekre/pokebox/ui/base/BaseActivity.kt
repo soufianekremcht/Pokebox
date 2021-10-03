@@ -25,11 +25,11 @@ abstract class BaseActivity<T : ViewDataBinding,V:BaseViewModel> : AppCompatActi
     }
 
     abstract fun getLayoutId() :Int
-    abstract fun getViewModel() : V
+    abstract fun getCurrentViewModel() : V
 
     private fun performDataBinding() {
         mViewDataBinding = DataBindingUtil.setContentView(this, getLayoutId())
-        mViewModel = mViewModel ?: getViewModel()
+        mViewModel = mViewModel ?: getCurrentViewModel()
         mViewDataBinding?.executePendingBindings()
     }
 

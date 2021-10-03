@@ -101,14 +101,12 @@ dependencies {
     implementation 'com.github.GrenderG:Toasty:1.5.0'
     implementation "com.github.skydoves:progressview:1.1.1"
     implementation "com.github.skydoves:rainbow:1.0.3"
+    implementation "com.leinardi.android:speed-dial:3.2.0"
 
 
     implementation 'com.afollestad.material-dialogs:core:3.3.0'
     implementation 'com.afollestad.material-dialogs:color:3.3.0'
     // Material Drawer
-    implementation "com.mikepenz:materialdrawer:$versions.materialDrawerRelease"
-    implementation "com.mikepenz:materialdrawer-iconics:$versions.materialDrawerRelease"
-    implementation "com.mikepenz:materialdrawer-nav:$versions.materialDrawerRelease"
     implementation "androidx.annotation:annotation:1.2.0"
 
     //json parser

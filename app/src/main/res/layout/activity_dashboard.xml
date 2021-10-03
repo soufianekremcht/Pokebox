@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.soufianekre.pokebox.ui.dashboard.DashboardViewModel" />
+    </data>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@drawable/bg_dashboard"
+                android:elevation="10dp">
+
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="end"
+                    android:alpha="0.1"
+                    android:rotation="25"
+                    android:layout_marginEnd="-40dp"
+                    android:src="@drawable/img_pokeball" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_small"
+                        android:layout_marginTop="100dp"
+                        android:layout_marginEnd="@dimen/spacing_small"
+                        android:layout_marginBottom="@dimen/spacing_small"
+                        android:padding="@dimen/spacing_normal"
+
+
+                        android:text="What Pokemon are you looking For?"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/font_big"
+
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/spacing_normal"
+                        android:background="@drawable/bg_pokemon_type"
+                        android:backgroundTint="@color/material_blue_grey_50"
+                        android:gravity="center"
+                        android:padding="@dimen/spacing_normal"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_search"
+                        app:drawableTint="@color/black"
+                        tools:text="What Pokemon are you looking For?" />
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/pokebox_options_list_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/spacing_large"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:spanCount="2"
+                        tools:itemCount="6"
+                        tools:listitem="@layout/item_grid_pokebox_option" />
+
+                </LinearLayout>
+
+
+            </FrameLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_normal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/spacing_small"
+                    android:text="Pokemon News"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_large"
+
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/spacing_small"
+                    android:text="View All"
+                    android:background="?selectableItemBackground"
+                    android:textColor="@color/material_deep_purple_400" />
+
+
+            </RelativeLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/pokemon_news_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_normal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="4"
+                tools:listitem="@layout/item_list_pokemon_news">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</layout>

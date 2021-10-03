@@ -14,15 +14,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pokebox">
-        <activity android:name=".ui.main.MainActivity">
+        <activity android:name=".ui.dashboard.DashboardActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.main.MainActivity"/>
+        <activity android:name=".ui.splash_screen.SplashScreenActivity"/>
         <activity android:name=".ui.pokemon_detail.PokemonDetailActivity"
             android:parentActivityName=".ui.main.MainActivity"/>
+        
+        
     </application>
 
 </manifest>

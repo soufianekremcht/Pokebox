@@ -32,7 +32,7 @@ class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>() {
         super.onCreate(savedInstanceState)
         viewBinding = getViewDataBinding()
         viewBinding.apply {
-            vm = getViewModel()
+            vm = getCurrentViewModel()
         }
         setupUI()
         loadFragment(PokemonListFragment())
@@ -83,7 +83,7 @@ class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>() {
         return R.layout.activity_main
     }
 
-    override fun getViewModel(): MainViewModel{
+    override fun getCurrentViewModel(): MainViewModel{
         mMainViewModel = ViewModelProvider(this,MyViewModelFactory()).get(MainViewModel::class.java)
         return mMainViewModel
     }
