@@ -1,4 +1,4 @@
-package com.soufianekre.pokebox.ui.pokemon_list
+package com.soufianekre.pokebox.ui.main.pokemon_list
 
 
 import android.os.Bundle

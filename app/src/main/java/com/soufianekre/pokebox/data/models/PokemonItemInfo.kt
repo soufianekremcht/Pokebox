@@ -28,11 +28,11 @@ data class PokemonItemInfo(
     var types: List<PokemonItemType>? = ArrayList(),
     @Json(name = "sprites")
     var sprites: PokemonItemSprite? = null,
-    val hp: Int = nextInt(maxHp),
-    val attack: Int = nextInt(maxAttack),
-    val defense: Int = nextInt(maxDefense),
-    val speed: Int = nextInt(maxSpeed),
-    val exp: Int = nextInt(maxExp)
+    var hp: Int = nextInt(maxHp),
+    var attack: Int = nextInt(maxAttack),
+    var defense: Int = nextInt(maxDefense),
+    var speed: Int = nextInt(maxSpeed),
+    var exp: Int = nextInt(maxExp)
 
 ) : Serializable{
 

@@ -19,7 +19,7 @@ class PokeboxOptionsAdapter(var mContext : Context, var options : ArrayList<Poke
 
         val binding = DataBindingUtil.inflate<ItemGridPokeboxOptionBinding>(
             inflater,
-            R.layout.item_pokemon, parent, false
+            R.layout.item_grid_pokebox_option, parent, false
         )
 
         return PokeboxOptionViewHolder(binding)

@@ -8,7 +8,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_small"
         app:cardCornerRadius="20dp"
-        app:cardElevation="5dp">
+        app:cardElevation="5dp"
+        android:clickable="true"
+        android:focusable="true">
 
         <FrameLayout
             android:layout_width="match_parent"

@@ -24,6 +24,7 @@ object ViewBindingUtils {
 
         Glide.with(view.context)
             .load(url)
+
             .listener(
                 GlidePalette.with(url)
                     .use(BitmapPalette.Profile.MUTED_LIGHT)

@@ -71,7 +71,7 @@
                         android:textStyle="bold"
                         app:drawableStartCompat="@drawable/ic_search"
                         app:drawableTint="@color/black"
-                        tools:text="What Pokemon are you looking For?" />
+                        android:text="What Pokemon are you looking For?" />
 
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -105,15 +105,18 @@
                     android:text="Pokemon News"
                     android:textColor="@color/black"
                     android:textSize="@dimen/font_large"
-
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/view_all_pokemons_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+
                     android:padding="@dimen/spacing_small"
                     android:text="View All"
                     android:background="?selectableItemBackground"

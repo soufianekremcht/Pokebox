@@ -31,7 +31,8 @@
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@color/material_green_500">
+                android:background="@color/material_green_500"
+                >
 
                 <ImageView
                     android:layout_width="100dp"
@@ -66,20 +67,20 @@
                         android:textColor="@color/white"
                         android:textSize="@dimen/font_large"
                         android:textStyle="bold"
-                        tools:text="#001" />
+                        android:text="#001" />
 
 
-                    <androidx.appcompat.widget.AppCompatImageView
+                    <ImageView
                         android:id="@+id/item_pokemon_image"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
                         android:layout_below="@id/item_pokemon_id"
                         android:layout_alignParentEnd="true"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginEnd="7dp"
                         android:padding="@dimen/spacing_small"
-                        android:src="@drawable/img_pokemon_bulbasaur"
-                        app:paletteCard="@{itemPokemonCard}"
-                        app:paletteImage="@{pokemon.imageUrl}" />
 
+                        android:src="@drawable/img_pokemon_bulbasaur" />
 
                     <TextView
                         android:id="@+id/item_pokemon_name"
@@ -89,17 +90,18 @@
                         android:textColor="@color/white"
                         android:textSize="@dimen/font_large"
                         android:textStyle="bold"
+                        android:text="@{pokemon.name}"
                         tools:text="Charizand"
                         android:layout_marginTop="@dimen/spacing_large"/>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/pokemon_strong_points_list_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <ListView
+                        android:id="@+id/pokemon_attribues_list_view"
+                        android:layout_width="50dp"
+                        android:layout_height="100dp"
                         android:layout_below="@id/item_pokemon_name"
                         android:layout_margin="@dimen/spacing_normal"
                         tools:itemCount="3"
-                        tools:listitem="@layout/item_poke_strong_points"/>
+                        tools:listitem="@layout/item_pokemon_attributes"/>
 
 
                 </RelativeLayout>

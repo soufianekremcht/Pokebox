@@ -7,8 +7,8 @@
     <data>
 
         <variable
-            name="pokemon"
-            type="com.soufianekre.pokebox.data.models.PokemonItem" />
+            name="pokemonData"
+            type="com.soufianekre.pokebox.data.models.PokemonItemInfo" />
 
         <variable
             name="vm"
@@ -49,9 +49,9 @@
                     android:layout_width="match_parent"
                     app:progressView_colorBackground="@color/white"
                     app:progressView_colorProgress="@color/purple_200"
-                    app:progressView_labelText="@{vm.pokemonInfoLiveData.hpString}"
-                    app:progressView_max="@{vm.pokemonInfoLiveData.maxHp}"
-                    app:progressView_progress="@{vm.pokemonInfoLiveData.hp}"
+                    app:progressView_labelText="@{pokemonData.hpString}"
+                    app:progressView_max="230"
+                    app:progressView_progress="@{pokemonData.hp}"
 
 
                     />
@@ -190,7 +190,7 @@
             android:layout_margin="@dimen/spacing_normal"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:spanCount="4"
-            tools:listitem="@layout/item_poke_strong_points" />
+            tools:listitem="@layout/item_pokemon_attributes" />
 
 
     </LinearLayout>

@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.soufianekre.pokebox.ui.main.MainViewModel
 import com.soufianekre.pokebox.ui.pokemon_detail.PokemonDetailViewModel
-import com.soufianekre.pokebox.ui.pokemon_list.PokemonListViewModel
+import com.soufianekre.pokebox.ui.main.pokemon_list.PokemonListViewModel
 
 class MyViewModelFactory() : ViewModelProvider.Factory {
 

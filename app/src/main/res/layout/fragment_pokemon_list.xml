@@ -8,7 +8,10 @@
 
         <variable
             name="vm"
-            type="com.soufianekre.pokebox.ui.pokemon_list.PokemonListViewModel" />
+            type="com.soufianekre.pokebox.ui.main.pokemon_list.PokemonListViewModel" />
+        <variable
+            name="pokemon"
+            type="com.soufianekre.pokebox.data.models.PokemonItem" />
     </data>
 
     <FrameLayout

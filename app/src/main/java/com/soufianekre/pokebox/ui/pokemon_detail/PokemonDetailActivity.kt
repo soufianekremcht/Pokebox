@@ -6,6 +6,7 @@ import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.animation.AnimationUtils
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -20,8 +21,10 @@ import com.soufianekre.pokebox.R
 import com.soufianekre.pokebox.data.models.PokemonItem
 import com.soufianekre.pokebox.databinding.ActivityPokemonDetailBinding
 import com.soufianekre.pokebox.ui.base.BaseTransformationActivity
-import com.soufianekre.pokebox.ui.pokemon_list.PokemonListFragment.Companion.POKEMON_TO_SHOW
+import com.soufianekre.pokebox.ui.main.MainActivity
+import com.soufianekre.pokebox.ui.main.pokemon_list.PokemonListFragment.Companion.POKEMON_TO_SHOW
 import timber.log.Timber
+import java.util.Collections.rotate
 
 
 class PokemonDetailActivity :
@@ -69,7 +72,7 @@ class PokemonDetailActivity :
     }
 
     override fun getLayoutId(): Int {
-        return R.layout.activity_pokemon_detail_version_1
+        return R.layout.activity_pokemon_detail
     }
 
     override fun getViewModel(): PokemonDetailViewModel {
@@ -104,30 +107,8 @@ class PokemonDetailActivity :
             });
 
 
-        val pagerAdapter = PokemonDetailViewPagerAdapter(supportFragmentManager)
 
-        binding.pokeDetailViewPager.apply {
-            adapter = pagerAdapter
-            addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-
-                override fun onPageScrolled(
-                    position: Int,
-                    positionOffset: Float,
-                    positionOffsetPixels: Int
-                ) {
-                }
-
-                override fun onPageSelected(position: Int) {
-
-                }
-
-                override fun onPageScrollStateChanged(state: Int) {
-                }
-
-            })
-        }
-
-        binding.pokeDetailTabLayout.setupWithViewPager(binding.pokeDetailViewPager)
+        rotatePokeball()
         //binding.pokeDetailTabLayout.getTabAt(0)?.setIcon(R.drawable.ic_home_news)
 
         val options: RequestOptions = RequestOptions()
@@ -175,6 +156,34 @@ class PokemonDetailActivity :
 
     private fun getPokemonInfo() {
         getViewModel().pokemonInfoLiveData.observe(this, Observer {
+
+            // Setup View Pager
+
+            val pagerAdapter = PokemonDetailViewPagerAdapter(supportFragmentManager,it)
+
+            binding.pokeDetailViewPager.apply {
+                adapter = pagerAdapter
+                addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+
+                    override fun onPageScrolled(
+                        position: Int,
+                        positionOffset: Float,
+                        positionOffsetPixels: Int
+                    ) {
+                    }
+
+                    override fun onPageSelected(position: Int) {
+
+                    }
+
+                    override fun onPageScrollStateChanged(state: Int) {
+                    }
+
+                })
+            }
+
+            binding.pokeDetailTabLayout.setupWithViewPager(binding.pokeDetailViewPager)
+
 
             // display stats
             /*
@@ -245,6 +254,12 @@ class PokemonDetailActivity :
 
     private fun formatWeight(weight: Int): String {
         return "$weight KG"
+    }
+
+    private fun rotatePokeball(){
+        val rotation = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        rotation.fillAfter = true
+        binding.pokemonPokeballImg.startAnimation(rotation)
     }
 
 

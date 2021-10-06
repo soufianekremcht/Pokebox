@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_normal"
             app:cardCornerRadius="20dp"
-            app:cardElevation="10dp">
+            app:cardElevation="5dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -89,7 +89,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:columnCount="2"
-            android:rowCount="3">
+            android:rowCount="3"
+            android:layout_margin="@dimen/spacing_small">
 
             <TextView
                 android:id="@+id/pokemon_gender"

@@ -1,18 +1,23 @@
-package com.soufianekre.pokebox.ui.pokemon_list
+package com.soufianekre.pokebox.ui.main.pokemon_list
 
 import android.content.Context
 import android.graphics.Color
 import android.os.SystemClock
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.skydoves.transformationlayout.TransformationLayout
 import com.soufianekre.pokebox.R
 import com.soufianekre.pokebox.data.models.PokemonItem
 import com.soufianekre.pokebox.databinding.ItemPokemonBinding
+import com.soufianekre.pokebox.ui.base.BaseViewHolder
 import com.soufianekre.pokebox.ui.pokemon_detail.PokemonDetailActivity
-import com.soufianekre.pokebox.ui.pokemon_list.PokemonListAdapter.PokemonListViewHolder
+import com.soufianekre.pokebox.ui.main.pokemon_list.PokemonListAdapter.PokemonListViewHolder
 import java.util.*
 
 
@@ -82,6 +87,20 @@ class PokemonListAdapter(var mContext: Context, var listener: PokemonAdapterList
             binding.itemPokemonTransformationLayout.containerColor = Color.WHITE
             //binding.itemPokemonTransformationLayout.scrimColor = Color.WHITE
 
+            Glide.with(binding.root)
+                .load(currentPokemon.getImageUrl())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .error(R.drawable.img_pokemon_chikorita)
+                .into(binding.itemPokemonImage)
+
+            var attributes = arrayListOf("Fire","Grass")
+            // TODO : List of Pokemon Attributes
+            binding.pokemonAttribuesListView.apply {
+
+                adapter = ArrayAdapter<String>(mContext,R.layout.item_pokemon_attributes,attributes)
+
+            }
+
 
 
 
@@ -102,5 +121,17 @@ class PokemonListAdapter(var mContext: Context, var listener: PokemonAdapterList
     interface PokemonAdapterListener {
         fun onPokemonClicked(pokemon: PokemonItem)
     }
+
+    inner class PokemonAttributeViewHolder(var v : View) : BaseViewHolder(v){
+
+        override fun onBind(position: Int) {
+            TODO("Not yet implemented")
+        }
+
+    }
+
+    data class PokemonAttribute(
+        var name : String?
+    )
 
 }

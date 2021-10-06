@@ -1,4 +1,4 @@
-package com.soufianekre.pokebox.ui.pokemon_detail.about
+package com.soufianekre.pokebox.ui.pokemon_detail.evolutions
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,12 +7,14 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.soufianekre.pokebox.R
 import com.soufianekre.pokebox.data.models.PokemonItemInfo
-import com.soufianekre.pokebox.databinding.FragmentPokemonAboutBinding
+import com.soufianekre.pokebox.databinding.FragmentPokemonEvolutionBinding
 import com.soufianekre.pokebox.ui.base.BaseFragment
 
-class AboutPokemonFragment(var pokemon : PokemonItemInfo?) : BaseFragment<FragmentPokemonAboutBinding,AboutPokemonViewModel>(){
+public class PokemonEvolutionFragment(var pokemon : PokemonItemInfo?) : BaseFragment<FragmentPokemonEvolutionBinding,PokemonEvolutionsViewModel>(){
 
-    lateinit var viewBinding : FragmentPokemonAboutBinding
+
+
+    lateinit var viewBinding : FragmentPokemonEvolutionBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,10 +35,11 @@ class AboutPokemonFragment(var pokemon : PokemonItemInfo?) : BaseFragment<Fragme
 
     }
     override fun getLayoutId(): Int {
-        return R.layout.fragment_pokemon_about
+        return R.layout.fragment_pokemon_evolution
     }
 
-    override fun getViewModel(): AboutPokemonViewModel {
-        return ViewModelProvider(this).get(AboutPokemonViewModel::class.java)
+    override fun getViewModel(): PokemonEvolutionsViewModel {
+        return ViewModelProvider(this).get(PokemonEvolutionsViewModel::class.java)
     }
+
 }
