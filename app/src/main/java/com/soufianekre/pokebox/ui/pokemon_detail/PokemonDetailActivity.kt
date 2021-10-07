@@ -6,6 +6,7 @@ import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.WindowManager
 import android.view.animation.AnimationUtils
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
@@ -13,7 +14,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.github.florent37.glidepalette.BitmapPalette
+import com.github.florent37.glidepalette.GlidePalette
 import com.google.android.material.appbar.AppBarLayout
+import com.skydoves.rainbow.Rainbow
+import com.skydoves.rainbow.RainbowOrientation
+import com.skydoves.rainbow.color
 import com.skydoves.transformationlayout.TransformationCompat
 import com.skydoves.transformationlayout.TransformationLayout
 import com.soufianekre.pokebox.MyViewModelFactory
@@ -40,8 +46,13 @@ class PokemonDetailActivity :
         checkIntents()
         binding = getViewDataBinding()
         binding.apply {
+            vm = getViewModel()
+            pokemon = currentPokemon
             lifecycleOwner = this@PokemonDetailActivity
         }
+
+
+
 
         getViewModel().fetchPokemonInfo(currentPokemon?.name!!)
         setupUI()
@@ -99,12 +110,14 @@ class PokemonDetailActivity :
             onBackPressed()
         }
 
+
         binding.pokemonDetailAppbar.addOnOffsetChangedListener(
             AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
                 {
 
                 }
             });
+        binding.pokemonName.text = currentPokemon?.name
 
 
 
@@ -112,15 +125,14 @@ class PokemonDetailActivity :
         //binding.pokeDetailTabLayout.getTabAt(0)?.setIcon(R.drawable.ic_home_news)
 
         val options: RequestOptions = RequestOptions()
-            .error(R.drawable.img_spider)
+            .error(R.drawable.img_pokemon_chikorita)
         // show image + color the  background
 
         Glide.with(this)
             .load(currentPokemon?.getImageUrl())
             .apply(options)
-            .into(binding.pokemonImage)
-        /*
-        .listener(
+
+            .listener(
             GlidePalette.with(currentPokemon?.getImageUrl())
                 .use(BitmapPalette.Profile.MUTED_LIGHT)
                 .intoCallBack { palette ->
@@ -128,12 +140,12 @@ class PokemonDetailActivity :
                     val domain = palette?.dominantSwatch?.rgb
                     if (domain != null) {
                         if (light != null) {
-                            Rainbow(binding.pokemonDetailToolbarLayout).palette {
+                            Rainbow(binding.pokemonDetailMainLayout).palette {
                                 +color(domain)
                                 +color(light)
                             }.background(orientation = RainbowOrientation.TOP_BOTTOM)
                         } else {
-                            binding.pokemonDetailToolbarLayout.setBackgroundColor(domain)
+                            binding.pokemonDetailMainLayout.setBackgroundColor(domain)
                         }
                         window.apply {
                             addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
@@ -142,12 +154,16 @@ class PokemonDetailActivity :
                     }
                 }
                 .crossfade(true))
-         */
+            .into(binding.pokemonImage)
 
 
+
+        /*
         binding.pokemonDetailAppbar.backgroundTintList = ColorStateList.valueOf(
             ResourcesCompat.getColor(resources, R.color.material_amber_800, null)
         )
+
+         */
 
         getPokemonInfo()
 

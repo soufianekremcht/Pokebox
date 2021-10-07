@@ -87,17 +87,22 @@ class PokemonListAdapter(var mContext: Context, var listener: PokemonAdapterList
             binding.itemPokemonTransformationLayout.containerColor = Color.WHITE
             //binding.itemPokemonTransformationLayout.scrimColor = Color.WHITE
 
+            /*
             Glide.with(binding.root)
                 .load(currentPokemon.getImageUrl())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .error(R.drawable.img_pokemon_chikorita)
                 .into(binding.itemPokemonImage)
 
+             */
+
             var attributes = arrayListOf("Fire","Grass")
+
             // TODO : List of Pokemon Attributes
             binding.pokemonAttribuesListView.apply {
 
-                adapter = ArrayAdapter<String>(mContext,R.layout.item_pokemon_attributes,attributes)
+                adapter = ArrayAdapter<String>(mContext,R.layout.item_pokemon_attributes,
+                    R.id.pokemon_attribute_text,attributes)
 
             }
 
@@ -130,8 +135,5 @@ class PokemonListAdapter(var mContext: Context, var listener: PokemonAdapterList
 
     }
 
-    data class PokemonAttribute(
-        var name : String?
-    )
 
 }

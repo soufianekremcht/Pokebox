@@ -49,8 +49,8 @@
                     android:layout_width="match_parent"
                     app:progressView_colorBackground="@color/white"
                     app:progressView_colorProgress="@color/purple_200"
+
                     app:progressView_labelText="@{pokemonData.hpString}"
-                    app:progressView_max="230"
                     app:progressView_progress="@{pokemonData.hp}"
 
 
@@ -80,9 +80,9 @@
                     app:progressView_colorProgress="@color/material_red_500"
                     app:progressView_labelColorInner="@color/white"
                     app:progressView_labelColorOuter="@color/black"
-                    app:progressView_labelText="Attack"
-                    app:progressView_max="230"
-                    app:progressView_progress="53"
+
+                    app:progressView_labelText="@{pokemonData.attackString}"
+                    app:progressView_progress="@{pokemonData.attack}"
 
                     />
 
@@ -109,9 +109,9 @@
                     app:progressView_colorProgress="@color/material_green_500"
                     app:progressView_labelColorInner="@color/white"
                     app:progressView_labelColorOuter="@color/black"
-                    app:progressView_labelText="@{vm.pokemonInfoLiveData.hpString}"
-                    app:progressView_max="@{vm.pokemonInfoLiveData.maxHp}"
-                    app:progressView_progress="@{vm.pokemonInfoLiveData.hp}" />
+
+                    app:progressView_labelText="@{pokemonData.speedString}"
+                    app:progressView_progress="@{pokemonData.speed}" />
 
             </LinearLayout>
 
@@ -137,9 +137,10 @@
                     app:progressView_colorProgress="@color/material_blue_500"
                     app:progressView_labelColorInner="@color/white"
                     app:progressView_labelColorOuter="@color/black"
-                    app:progressView_labelText="@{vm.pokemonInfoLiveData.hpString}"
-                    app:progressView_max="@{vm.pokemonInfoLiveData.maxHp}"
-                    app:progressView_progress="@{vm.pokemonInfoLiveData.hp}" />
+
+
+                    app:progressView_labelText="@{pokemonData.defenseString}"
+                    app:progressView_progress="@{pokemonData.defense}"/>
 
             </LinearLayout>
 
@@ -162,9 +163,9 @@
                     style="@style/style_pokemon_detail_progress_bar"
                     android:layout_width="match_parent"
                     app:progressView_colorProgress="@color/material_yellow_accent_400"
-                    app:progressView_labelText="@{vm.pokemonInfoLiveData.expString}"
-                    app:progressView_max="@{vm.pokemonInfoLiveData.maxExp}"
-                    app:progressView_progress="@{vm.pokemonInfoLiveData.exp}" />
+
+                    app:progressView_labelText="@{pokemonData.expString}"
+                    app:progressView_progress="@{pokemonData.exp}" />
 
             </LinearLayout>
         </LinearLayout>
@@ -185,6 +186,7 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/pokemon_strong_points_list_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_normal"

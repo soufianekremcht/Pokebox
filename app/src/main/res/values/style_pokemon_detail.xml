@@ -25,7 +25,7 @@
 
     <style name="style_pokemon_detail_progress_bar">
         <item name="android:layout_margin">@dimen/spacing_small</item>
-        <item name="android:layout_height">10dp</item>
+        <item name="android:layout_height">15dp</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="progressView_colorBackground">@color/white</item>
         <item name="progressView_padding">1dp</item>
@@ -33,10 +33,11 @@
         <item name="progressView_min">0</item>
         <item name="progressView_labelColorInner">@color/white</item>
         <item name="progressView_labelColorOuter">@color/black</item>
-        <item name="progressView_labelSize">13dp</item>
+        <item name="progressView_labelSize">10dp</item>
         <item name="progressView_labelSpace">10dp</item>
         <item name="progressView_labelTypeface">bold</item>
         <item name="progressView_autoAnimate">true</item>
+        <item name="progressView_max">230</item>
     </style>
 
     <style name="style_pokemon_detail_stat_layout">
