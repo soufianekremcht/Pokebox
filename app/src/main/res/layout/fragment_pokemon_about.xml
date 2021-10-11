@@ -11,6 +11,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/pokemon_description_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Bulbasaur can be seen napping in bright sunlight.There is a seed on its back, By soaking up the sun 's rays , the deed grows progresssively larger."
@@ -26,7 +27,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_normal">
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:padding="@dimen/spacing_small">
 
                 <TextView
                     android:id="@+id/pokemon_height"
@@ -47,7 +49,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/pokemon_height"
                     android:layout_margin="@dimen/spacing_small"
-                    android:text="2.03" />
+                    android:text="2.03 Kg" />
 
                 <TextView
                     android:id="@+id/pokemon_weight"
@@ -70,7 +72,7 @@
                     android:layout_below="@id/pokemon_weight"
                     android:layout_toEndOf="@id/pokemon_height"
                     android:layout_margin="@dimen/spacing_small"
-                    android:text="2.94" />
+                    android:text="2.94 m" />
 
 
             </RelativeLayout>
@@ -82,6 +84,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/spacing_small"
             android:text="Breeding"
+            android:layout_margin="@dimen/spacing_small"
             android:textColor="@color/black"
             android:textSize="@dimen/font_normal" />
 

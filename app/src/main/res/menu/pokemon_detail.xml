@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/menu_pokemon_detail_id"
-        android:title="#001"
+        android:title="#000"
         app:showAsAction="always"/>
 
 </menu>

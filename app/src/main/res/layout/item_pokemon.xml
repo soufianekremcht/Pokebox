@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         app:transformation_duration="350">
 
-        <com.google.android.material.card.MaterialCardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/item_pokemon_card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -76,10 +76,9 @@
                         android:layout_below="@id/item_pokemon_name"
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="7dp"
-
                         android:layout_marginEnd="7dp"
-                        app:paletteImage="@{pokemon.imageUrl}"
-                        app:paletteCard="@{itemPokemonCard}"
+                        paletteImage="@{pokemon.imageUrl}"
+                        paletteCard="@{itemPokemonCard}"
 
                         android:padding="@dimen/spacing_small"
                         android:src="@drawable/img_pokemon_bulbasaur" />
@@ -98,6 +97,7 @@
                         tools:text="Charizand" />
 
                     <ListView
+                        android:visibility="gone"
                         android:id="@+id/pokemon_attribues_list_view"
                         android:layout_width="50dp"
                         android:layout_height="100dp"
@@ -114,7 +114,7 @@
 
 
             </FrameLayout>
-        </com.google.android.material.card.MaterialCardView>
+        </androidx.cardview.widget.CardView>
 
 
         <!-- other views -->

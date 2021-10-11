@@ -2,13 +2,11 @@ package com.soufianekre.pokebox.ui.pokemon_detail
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.view.WindowManager
+import android.view.*
 import android.view.animation.AnimationUtils
-import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
@@ -17,6 +15,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.github.florent37.glidepalette.BitmapPalette
 import com.github.florent37.glidepalette.GlidePalette
 import com.google.android.material.appbar.AppBarLayout
+import com.skydoves.androidribbon.ribbonView
 import com.skydoves.rainbow.Rainbow
 import com.skydoves.rainbow.RainbowOrientation
 import com.skydoves.rainbow.color
@@ -26,11 +25,11 @@ import com.soufianekre.pokebox.MyViewModelFactory
 import com.soufianekre.pokebox.R
 import com.soufianekre.pokebox.data.models.PokemonItem
 import com.soufianekre.pokebox.databinding.ActivityPokemonDetailBinding
+import com.soufianekre.pokebox.helper.PokemonTypeUtils
 import com.soufianekre.pokebox.ui.base.BaseTransformationActivity
-import com.soufianekre.pokebox.ui.main.MainActivity
 import com.soufianekre.pokebox.ui.main.pokemon_list.PokemonListFragment.Companion.POKEMON_TO_SHOW
+import kotlinx.android.synthetic.main.activity_pokemon_detail.*
 import timber.log.Timber
-import java.util.Collections.rotate
 
 
 class PokemonDetailActivity :
@@ -40,6 +39,7 @@ class PokemonDetailActivity :
     private lateinit var binding: ActivityPokemonDetailBinding
 
     private var currentPokemon: PokemonItem? = PokemonItem()
+    private var menuPokemonIdItem: MenuItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,10 +50,6 @@ class PokemonDetailActivity :
             pokemon = currentPokemon
             lifecycleOwner = this@PokemonDetailActivity
         }
-
-
-
-
         getViewModel().fetchPokemonInfo(currentPokemon?.name!!)
         setupUI()
 
@@ -74,7 +70,9 @@ class PokemonDetailActivity :
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.pokemon_detail, menu)
-        var menuIdItem: MenuItem = menu!!.findItem(R.id.menu_pokemon_detail_id)
+
+        menuPokemonIdItem = menu!!.findItem(R.id.menu_pokemon_detail_id)
+
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -103,59 +101,61 @@ class PokemonDetailActivity :
     }
 
     private fun setupUI() {
-        setSupportActionBar(binding.pokeDetailToolbar)
+        setSupportActionBar(binding.pokemonDetailToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        binding.pokeDetailToolbar.setNavigationOnClickListener {
+        binding.pokemonDetailToolbar.setNavigationOnClickListener {
             onBackPressed()
         }
 
 
         binding.pokemonDetailAppbar.addOnOffsetChangedListener(
             AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
-                {
+                run {
+
+                    if (verticalOffset == 0 || verticalOffset <= binding.pokemonDetailToolbar.height) {
+                        binding.pokemonImage.visibility = View.VISIBLE
+                    } else {
+                        binding.pokemonImage.visibility = View.VISIBLE
+                    }
+
 
                 }
             });
         binding.pokemonName.text = currentPokemon?.name
 
 
-
         rotatePokeball()
-        //binding.pokeDetailTabLayout.getTabAt(0)?.setIcon(R.drawable.ic_home_news)
-
         val options: RequestOptions = RequestOptions()
             .error(R.drawable.img_pokemon_chikorita)
-        // show image + color the  background
-
         Glide.with(this)
             .load(currentPokemon?.getImageUrl())
             .apply(options)
 
             .listener(
-            GlidePalette.with(currentPokemon?.getImageUrl())
-                .use(BitmapPalette.Profile.MUTED_LIGHT)
-                .intoCallBack { palette ->
-                    val light = palette?.lightVibrantSwatch?.rgb
-                    val domain = palette?.dominantSwatch?.rgb
-                    if (domain != null) {
-                        if (light != null) {
-                            Rainbow(binding.pokemonDetailMainLayout).palette {
-                                +color(domain)
-                                +color(light)
-                            }.background(orientation = RainbowOrientation.TOP_BOTTOM)
-                        } else {
-                            binding.pokemonDetailMainLayout.setBackgroundColor(domain)
-                        }
-                        window.apply {
-                            addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-                            statusBarColor = domain
+                GlidePalette.with(currentPokemon?.getImageUrl())
+                    .use(BitmapPalette.Profile.MUTED_LIGHT)
+                    .intoCallBack { palette ->
+                        val light = palette?.lightVibrantSwatch?.rgb
+                        val domain = palette?.dominantSwatch?.rgb
+                        if (domain != null) {
+                            if (light != null) {
+                                Rainbow(binding.pokemonDetailMainLayout).palette {
+                                    +color(domain)
+                                    +color(light)
+                                }.background(orientation = RainbowOrientation.TOP_BOTTOM)
+                            } else {
+                                binding.pokemonDetailMainLayout.setBackgroundColor(domain)
+                            }
+                            window.apply {
+                                addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+                                statusBarColor = domain
+                            }
                         }
                     }
-                }
-                .crossfade(true))
+                    .crossfade(true))
             .into(binding.pokemonImage)
-
 
 
         /*
@@ -175,7 +175,9 @@ class PokemonDetailActivity :
 
             // Setup View Pager
 
-            val pagerAdapter = PokemonDetailViewPagerAdapter(supportFragmentManager,it)
+            menuPokemonIdItem?.title = String.format("#%03d", it?.pokemonId)
+
+            val pagerAdapter = PokemonDetailViewPagerAdapter(supportFragmentManager, it)
 
             binding.pokeDetailViewPager.apply {
                 adapter = pagerAdapter
@@ -201,78 +203,43 @@ class PokemonDetailActivity :
             binding.pokeDetailTabLayout.setupWithViewPager(binding.pokeDetailViewPager)
 
 
-            // display stats
-            /*
-            for (stat in it?.stats!!) {
-                when (stat.stat?.name){
-                    "hp" -> {
-                        val fullStat = stat.baseStat + stat.effort
-                        binding.pokemonHpStatProgress.labelText = formatStat(fullStat)
-                        binding.pokemonHpStatProgress.progress = (fullStat).toFloat()
-                    }
-                    "speed" ->{
-                        val fullStat = stat.baseStat + stat.effort
-                        binding.pokemonSpeedStatProgress.labelText = formatStat(fullStat)
-                        binding.pokemonSpeedStatProgress.progress = (fullStat).toFloat()
-                    }
-                    "defense" ->{
-                        val fullStat = stat.baseStat + stat.effort
-                        binding.pokemonDefStatProgress.labelText = formatStat(fullStat)
-                        binding.pokemonDefStatProgress.progress = (fullStat).toFloat()
-                    }
-                    "attack" ->{
-                        val fullStat = stat.baseStat + stat.effort
-                        binding.pokemonAtkStatProgress.labelText = formatStat(fullStat)
-                        binding.pokemonAtkStatProgress.progress = (fullStat).toFloat()
-                    }
-                }
-            }
-
-             */
             // TODO : display types
-            /*
-            for (typeInfo in it.types!!) {
 
-                with(binding.pokemonTypeListView) {
-                    addRibbon(
-                        ribbonView(context) {
-                            setText(typeInfo.type!!.name)
-                            setTextColor(Color.WHITE)
-                            setPaddingLeft(84f)
-                            setPaddingRight(84f)
-                            setPaddingTop(2f)
-                            setPaddingBottom(10f)
-                            setTextSize(16f)
-                            setRibbonRadius(120f)
-                            setTextStyle(Typeface.BOLD)
-                            setRibbonBackgroundColorResource(
-                                PokemonTypeUtils.getTypeColor(typeInfo.type!!.name)
-                            )
-                        }.apply {
-                            maxLines = 1
-                            gravity = Gravity.CENTER
-                        }
-                    )
+            if (it != null) {
+                for (typeInfo in it.types!!) {
+
+                    with(binding.pokemonTypeListView) {
+
+                        addRibbon(
+                            ribbonView(context) {
+                                setText(typeInfo.type!!.name)
+                                setTextColor(Color.WHITE)
+                                setPaddingLeft(84f)
+                                setPaddingRight(84f)
+                                setPaddingTop(2f)
+                                setPaddingBottom(10f)
+                                setTextSize(16f)
+                                setRibbonRadius(120f)
+                                setTextStyle(Typeface.BOLD)
+                                setRibbonBackgroundColorResource(
+                                    PokemonTypeUtils.getTypeColor(typeInfo.type!!.name)
+                                )
+                            }.apply {
+                                maxLines = 1
+                                gravity = Gravity.CENTER
+                            }
+                        )
+                    }
                 }
+
+
             }
 
-             */
+
         })
     }
 
-    private fun formatStat(statValue: Int): String {
-        return "$statValue/300"
-    }
-
-    private fun formatHeight(height: Int): String {
-        return "$height M"
-    }
-
-    private fun formatWeight(weight: Int): String {
-        return "$weight KG"
-    }
-
-    private fun rotatePokeball(){
+    private fun rotatePokeball() {
         val rotation = AnimationUtils.loadAnimation(this, R.anim.rotate);
         rotation.fillAfter = true
         binding.pokemonPokeballImg.startAnimation(rotation)

@@ -52,7 +52,7 @@ class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>() {
 
     private fun setupUI(){
         setSupportActionBar(viewBinding.mainToolbar)
-        viewBinding.mainToolbar.title = ""
+        supportActionBar?.setDisplayShowTitleEnabled(false)
         drawerToggle = ActionBarDrawerToggle(this,viewBinding.mainDrawerLayout,viewBinding.mainToolbar,R.string.open,R.string.close)
         drawerToggle.syncState()
 

@@ -7,6 +7,7 @@ import androidx.activity.OnBackPressedDispatcherOwner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.github.florent37.glidepalette.BitmapPalette
@@ -15,6 +16,7 @@ import com.skydoves.progressview.ProgressView
 import com.skydoves.rainbow.Rainbow
 import com.skydoves.rainbow.RainbowOrientation
 import com.skydoves.rainbow.color
+import com.soufianekre.pokebox.R
 import com.soufianekre.pokebox.data.models.PokemonItemType
 
 object ViewBindingUtils {
@@ -22,18 +24,37 @@ object ViewBindingUtils {
     @BindingAdapter("paletteImage", "paletteCard")
     fun bindLoadImagePalette(view: AppCompatImageView, url: String, paletteCard: CardView) {
 
-        Glide.with(view.context)
-            .load(url)
-            .listener(
-                GlidePalette.with(url)
-                    .use(BitmapPalette.Profile.MUTED_LIGHT)
-                    .intoCallBack { palette ->
-                        val rgb = palette?.dominantSwatch?.rgb
-                        if (rgb != null) {
-                            paletteCard.setCardBackgroundColor(rgb)
-                        }
-                    }.crossfade(true)
-            ).into(view)
+        try {
+            Glide.with(view.context)
+                .load(url)
+                .error(R.drawable.img_spider)
+                .listener(
+                    GlidePalette.with(url)
+                        .use(BitmapPalette.Profile.MUTED_LIGHT)
+                        .intoCallBack { palette ->
+                            val rgb = palette?.dominantSwatch?.rgb
+                            if (rgb != null) {
+                                paletteCard.setCardBackgroundColor(rgb)
+                            }
+                        }.crossfade(true)
+                ).into(view)
+
+        } catch (e: Exception) {
+            Glide.with(view.context)
+                .load(url)
+                .error(R.drawable.img_spider)
+                .into(view)
+
+            paletteCard.setCardBackgroundColor(
+                ContextCompat.getColor(
+                    view.context,
+                    R.color.material_green_500
+                )
+            )
+
+        }
+
+
     }
 
     @JvmStatic

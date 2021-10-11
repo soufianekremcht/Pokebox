@@ -24,24 +24,28 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
                 android:background="@drawable/bg_dashboard"
-                android:elevation="10dp">
+                android:elevation="10dp"
+                android:orientation="vertical"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.7">
 
                 <ImageView
                     android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:layout_gravity="end"
+                    android:layout_marginEnd="-40dp"
                     android:alpha="0.1"
                     android:rotation="25"
-                    android:layout_marginEnd="-40dp"
                     android:src="@drawable/img_pokeball" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/transparent"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+
+                    >
 
                     <TextView
                         android:layout_width="match_parent"
@@ -68,10 +72,10 @@
                         android:backgroundTint="@color/material_blue_grey_50"
                         android:gravity="center"
                         android:padding="@dimen/spacing_normal"
+                        android:text="What Pokemon are you looking For?"
                         android:textStyle="bold"
                         app:drawableStartCompat="@drawable/ic_search"
-                        app:drawableTint="@color/black"
-                        android:text="What Pokemon are you looking For?" />
+                        app:drawableTint="@color/black" />
 
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -88,6 +92,7 @@
 
 
             </FrameLayout>
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -114,12 +119,12 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
+                    android:background="?selectableItemBackground"
                     android:clickable="true"
-                    android:focusable="true"
 
+                    android:focusable="true"
                     android:padding="@dimen/spacing_small"
                     android:text="View All"
-                    android:background="?selectableItemBackground"
                     android:textColor="@color/material_deep_purple_400" />
 
 
