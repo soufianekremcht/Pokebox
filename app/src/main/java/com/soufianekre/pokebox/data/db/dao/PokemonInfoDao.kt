@@ -11,7 +11,7 @@ import io.reactivex.Single
 
 @Dao
 public interface PokemonInfoDao{
-    @Query("SELECT * FROM pokemon_info WHERE name = :name")
+    @Query("SELECT * FROM pokemon_info WHERE name= :name")
     fun getPokemonInfo(name: String): Single<PokemonItemInfo>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

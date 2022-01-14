@@ -12,7 +12,6 @@ import com.soufianekre.pokebox.R
 import com.soufianekre.pokebox.databinding.ActivityMainBinding
 import com.soufianekre.pokebox.ui.base.BaseActivity
 import com.soufianekre.pokebox.ui.main.pokemon_list.PokemonListFragment
-import kotlinx.android.synthetic.main.activity_pokemon_detail.view.*
 
 
 class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>() {

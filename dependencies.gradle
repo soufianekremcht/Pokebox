@@ -12,9 +12,6 @@ ext.versions = [
         gradleBuildTool      : '4.1.1',
         spotlessGradle       : '5.8.2',
         versionPlugin        : '0.28.0',
-
-        // kotlin
-        kotlin               : '1.4.20',
         // rxJava2
         rxjavaKotlin          :'2.2.1',
 
@@ -30,7 +27,7 @@ ext.versions = [
         // architecture components
         fragmentVersion      : '1.2.5',
         lifecycleVersion     : '2.2.0',
-        roomVersion          : '2.3.0-alpha03',
+        roomVersion          : '2.3.0',
         archCompomentVersion : '2.1.0',
 
         // startup

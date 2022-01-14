@@ -20,7 +20,6 @@ import com.soufianekre.pokebox.ui.pokemon_detail.PokemonDetailActivity
 import com.soufianekre.pokebox.ui.main.pokemon_list.PokemonListAdapter.PokemonListViewHolder
 import java.util.*
 
-
 class PokemonListAdapter(var mContext: Context, var listener: PokemonAdapterListener?) :
     RecyclerView.Adapter<PokemonListViewHolder>() {
 

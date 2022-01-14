@@ -28,7 +28,6 @@ import com.soufianekre.pokebox.databinding.ActivityPokemonDetailBinding
 import com.soufianekre.pokebox.helper.PokemonTypeUtils
 import com.soufianekre.pokebox.ui.base.BaseTransformationActivity
 import com.soufianekre.pokebox.ui.main.pokemon_list.PokemonListFragment.Companion.POKEMON_TO_SHOW
-import kotlinx.android.synthetic.main.activity_pokemon_detail.*
 import timber.log.Timber
 
 
@@ -174,7 +173,6 @@ class PokemonDetailActivity :
         getViewModel().pokemonInfoLiveData.observe(this, Observer {
 
             // Setup View Pager
-
             menuPokemonIdItem?.title = String.format("#%03d", it?.pokemonId)
 
             val pagerAdapter = PokemonDetailViewPagerAdapter(supportFragmentManager, it)

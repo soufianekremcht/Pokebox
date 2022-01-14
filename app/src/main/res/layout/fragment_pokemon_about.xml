@@ -2,8 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,7 +12,7 @@
             android:id="@+id/pokemon_description_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Bulbasaur can be seen napping in bright sunlight.There is a seed on its back, By soaking up the sun 's rays , the deed grows progresssively larger."
+            android:text="@string/sample_pokemon_description"
             android:padding="@dimen/spacing_normal"/>
 
         <androidx.cardview.widget.CardView
